@@ -4,10 +4,10 @@ using FineBlog.Models;
 using FineBlog.Utilites;
 using FineBlog.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using X.PagedList;
 
 namespace FineBlog.Areas.Admin.Controllers
 {
@@ -19,7 +19,11 @@ namespace FineBlog.Areas.Admin.Controllers
         public INotyfService _notification { get; }
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly UserManager<ApplicationUser> _userManager;
-        public PostController(ApplicationDbContext context, INotyfService notyfService, IWebHostEnvironment webHostEnvironment,UserManager<ApplicationUser> userManager)
+
+        public PostController(ApplicationDbContext context,
+                                INotyfService notyfService,
+                                IWebHostEnvironment webHostEnvironment,
+                                UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _notification = notyfService;
@@ -52,8 +56,10 @@ namespace FineBlog.Areas.Admin.Controllers
                 AuthorName = x.ApplicationUser!.FirstName + " " + x.ApplicationUser.LastName
             }).ToList();
 
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
 
-            return View(listOfPostsVM);
+            return View(await listOfPostsVM.OrderByDescending(x => x.CreatedDate).ToPagedListAsync(pageNumber, pageSize));
         }
 
         [HttpGet]
@@ -61,7 +67,6 @@ namespace FineBlog.Areas.Admin.Controllers
         {
             return View(new CreatePostVM());
         }
-
 
         [HttpPost]
         public async Task<IActionResult> Create(CreatePostVM vm)
@@ -182,5 +187,6 @@ namespace FineBlog.Areas.Admin.Controllers
             }
             return uniqueFileName;
         }
+
     }
 }

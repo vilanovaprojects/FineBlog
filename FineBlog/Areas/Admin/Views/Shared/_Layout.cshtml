@@ -1,4 +1,4 @@
-﻿@using Microsoft.AspNetCore.Identity;
+﻿﻿@using Microsoft.AspNetCore.Identity;
 @inject UserManager<ApplicationUser> _userManager;
 @{
     var loggedInUser = new ApplicationUser();
@@ -25,7 +25,7 @@
 
     <!-- Custom styles for this template-->
     <link href="~/dashboard/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
 
 </head>
 
@@ -50,7 +50,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" asp-action="Index" asp-controller="Post" asp-area="Admin">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Post</span>
                 </a>
@@ -97,13 +97,13 @@
 
                 <!-- Divider -->
                 <hr class="sidebar-divider d-none d-md-block">
+
             }
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-
 
         </ul>
         <!-- End of Sidebar -->
@@ -121,8 +121,11 @@
                         <i class="fa fa-bars"></i>
                     </button>
 
+
+
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
+
 
                         <div class="topbar-divider d-none d-sm-block"></div>
 
@@ -137,7 +140,6 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                  aria-labelledby="userDropdown">
-                                
                                 <div class="dropdown-divider"></div>
                                 <form asp-action="Logout" asp-controller="User" asp-area="Admin" method="post">
                                     <button type="submit" class="dropdown-item">
@@ -162,7 +164,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Fine Blog 2023</span>
+                        <span>Copyright &copy; Fine Blog 2022</span>
                     </div>
                 </div>
             </footer>
@@ -172,7 +174,7 @@
         <!-- End of Content Wrapper -->
 
     </div>
-    
+
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -195,10 +197,10 @@
     <!-- Page level custom scripts -->
     <script src="~/dashboard/js/demo/chart-area-demo.js"></script>
     <script src="~/dashboard/js/demo/chart-pie-demo.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/7qjkjvz7eegr5schf3b8iwvemcxjb82zvn5nvbm02u8l4xkb/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('#myTable').DataTable();
         });
 
@@ -210,7 +212,6 @@
     </script>
     @await RenderSectionAsync("Scripts", required: false)
     @await Component.InvokeAsync("Notyf")
-
 </body>
 
 </html>

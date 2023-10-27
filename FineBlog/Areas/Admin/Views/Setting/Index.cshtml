@@ -1,4 +1,5 @@
-﻿@model FineBlog.ViewModels.SettingVM
+﻿@model FineBlog.ViewModels.SettingVM﻿
+
 @{
     ViewData["Title"] = "Site Setting";
 }
@@ -11,7 +12,7 @@
         </div>
         <div class="card-body">
             <form asp-action="Index" asp-controller="Setting" asp-area="Admin" enctype="multipart/form-data">
-                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Id"/>
                 <div class="row mb-2">
                     <div class="col-9">
                         <div class="mb-2">
@@ -31,12 +32,12 @@
                             <span asp-validation-for="ShortDescription" class="text-danger"></span>
                         </div>
 
-                        <div class="mb-2">
+                         <div class="mb-2">
                             <label>Facebook Url</label>
                             <input type="text" asp-for="FacebookUrl" class="form-control" />
                             <span asp-validation-for="FacebookUrl" class="text-danger"></span>
                         </div>
-                        <div class="mb-2">
+                         <div class="mb-2">
                             <label>Github Url</label>
                             <input type="text" asp-for="GithubUrl" class="form-control" />
                             <span asp-validation-for="GithubUrl" class="text-danger"></span>
@@ -46,12 +47,12 @@
                             <input type="text" asp-for="TwitterUrl" class="form-control" />
                             <span asp-validation-for="TwitterUrl" class="text-danger"></span>
                         </div>
-
+                       
                     </div>
                     <div class="col-3">
                         <div class="mb-2">
                             @{
-                                if (Model.ThumbnailUrl == null)
+                                if(Model.ThumbnailUrl == null)
                                 {
                                     <img src="~/thumbnails/default_image.png" class="img-fluid" id="thumbnail" />
                                 }

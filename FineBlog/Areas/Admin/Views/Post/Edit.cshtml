@@ -13,7 +13,7 @@
         <div class="card-body">
             <form asp-action="Edit" asp-controller="Post" asp-area="Admin" enctype="multipart/form-data">
                 <input type="hidden" asp-for="Id" />
-                <input type="hidden" asp-for="ThumbnailUrl"/>
+                <input type="hidden" asp-for="ThumbnailUrl" />
                 <div class="row mb-2">
                     <div class="col-9">
                         <div class="mb-2">
@@ -35,7 +35,7 @@
                     <div class="col-3">
                         <div class="mb-2">
                             @{
-                                if(Model.ThumbnailUrl == null)
+                                if (Model.ThumbnailUrl == null)
                                 {
                                     <img src="~/thumbnails/default_image.png" class="img-fluid" id="thumbnail" />
                                 }
@@ -62,3 +62,14 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(".custom-file").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+            document.getElementById('thumbnail').src = window.URL.createObjectURL(this.files[0])
+        });
+    </script>
+}

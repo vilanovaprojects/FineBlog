@@ -1,4 +1,4 @@
-﻿@model FineBlog.ViewModels.CreatePostVM
+﻿@model FineBlog.ViewModels.CreatePostVM﻿
 
 @{
     ViewData["Title"] = "Create Post";
@@ -15,34 +15,34 @@
 
                 <div class="row mb-2">
                     <div class="col-9">
-                        <div class="mb-2">
-                            <label>Title</label>
-                            <input type="text" asp-for="Title" class="form-control" />
-                            <span asp-validation-for="Title" class="text-danger"></span>
-                        </div>
-                        <div class="mb-2">
-                            <label>Short Description</label>
-                            <input type="text" asp-for="ShortDescription" class="form-control" />
-                            <span asp-validation-for="ShortDescription" class="text-danger"></span>
-                        </div>
-                        <div class="mb-2">
-                            <label>Description</label>
-                            <textarea id="richEditor" asp-for="Description" class="form-control" rows="8"></textarea>
-                            <span asp-validation-for="Description" class="text-danger"></span>
-                        </div>
+                    <div class="mb-2">
+                        <label>Title</label>
+                        <input type="text" asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
-                    <div class="col-3">
-                        <div class="mb-2">
-                            <img src="~/thumbnails/default_image.png" class="img-fluid" id="thumbnail" />
-                        </div>
-                        <div class="mb-2">
-                            <label>Thumbnail</label>
-                            <input type="file" asp-for="Thumbnail" class="custom-file" />
-                            <span asp-validation-for="Description" class="text-danger"></span>
-                        </div>
+                    <div class="mb-2">
+                        <label>Short Description</label>
+                        <input type="text" asp-for="ShortDescription" class="form-control" />
+                        <span asp-validation-for="ShortDescription" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label>Description</label>
+                         <textarea id="richEditor" asp-for="Description" class="form-control" rows="8"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
                     </div>
                 </div>
-
+                <div class="col-3">
+                    <div class="mb-2">
+                            <img src="~/thumbnails/default_image.png" class="img-fluid" id="thumbnail" />
+                    </div>
+                    <div class="mb-2">
+                        <label>Thumbnail</label>
+                        <input type="file" asp-for="Thumbnail" class="custom-file"/>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                </div>
+                </div>
+                
                 <div class="mb-2">
                     <button type="submit" class="btn btn-primary w-100">Save</button>
                 </div>
@@ -52,7 +52,7 @@
 </div>
 
 @section Scripts{
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
     <script>
         $(".custom-file").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
