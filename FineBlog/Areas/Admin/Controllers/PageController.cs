@@ -103,6 +103,45 @@ namespace FineBlog.Areas.Admin.Controllers
             return RedirectToAction("Contact", "Page", new { area = "Admin" });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Privacy()
+        {
+            var page = await _context.Pages!.FirstOrDefaultAsync(x => x.Slug == "privacy");
+            var vm = new PageVM()
+            {
+                Id = page!.Id,
+                Title = page.Title,
+                ShortDescription = page.ShortDescription,
+                Description = page.Description,
+                ThumbnailUrl = page.ThumbnailUrl,
+            };
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Privacy(PageVM vm)
+        {
+            if (!ModelState.IsValid) { return View(vm); }
+            var page = await _context.Pages!.FirstOrDefaultAsync(x => x.Slug == "privacy");
+            if (page == null)
+            {
+                _notification.Error("Page not found");
+                return View();
+            }
+            page.Title = vm.Title;
+            page.ShortDescription = vm.ShortDescription;
+            page.Description = vm.Description;
+
+            if (vm.Thumbnail != null)
+            {
+                page.ThumbnailUrl = UploadImage(vm.Thumbnail);
+            }
+
+            await _context.SaveChangesAsync();
+            _notification.Success("Privacy page updated succesfully");
+            return RedirectToAction("Privacy", "Page", new { area = "Admin" });
+        }
+
         private string UploadImage(IFormFile file)
         {
             string uniqueFileName = "";
